@@ -4,7 +4,7 @@ from breaks.models import organizations, replacements
 
 
 class ReplacementEmployeeInline(TabularInline):
-    model = replacements.ReplacementsEmployee
+    model = replacements.ReplacementEmployee
     fields = ('employee', 'status',)
 
 

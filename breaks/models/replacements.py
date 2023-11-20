@@ -58,13 +58,14 @@ class ReplacementEmployee(models.Model):
     status = models.ForeignKey(
         'breaks.Replacement',
         on_delete=models.RESTRICT,
-        'replacement_employees',
+        related_name='replacement_employees',
         verbose_name='Статус'
     )
+
     class Meta:
         verbose_name = 'Смена - Работник'
         verbose_name_plural = 'Смены - Работники'
-        ordering = ('-date',)
+        # ordering = ('date',)
 
     def __str__(self):
         return f'Смена {self.replacement} для {self.group}'
