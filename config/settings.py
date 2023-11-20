@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     'api',
     'common',
+    'breaks',
 ]
 
 MIDDLEWARE = [
@@ -179,7 +180,7 @@ CSRF_COOKIE_SECURE = False
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Ekaterinburg'
+TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
