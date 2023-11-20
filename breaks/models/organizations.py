@@ -40,7 +40,7 @@ class Group(models.Model):
         User,
         on_delete=models.RESTRICT,
         related_name='group_managers',
-        verbose_name='Менеджер'
+        verbose_name='Менеджер',
     )
     employees = models.ManyToManyField(
         User,
@@ -68,3 +68,7 @@ class Group(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.pk})'
+
+    @property
+    def break_duration(self):
+        return 500
