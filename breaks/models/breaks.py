@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from breaks.constants import BREAK_CREATED_STATUS
+from breaks.constants import BREAK_CREATED_STATUS, BREAK_CREATED_DEFAULT
 from breaks.models.dicts import BreakStatus
 
 
@@ -40,5 +40,9 @@ class Break(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.status = BreakStatus.objects.get(code=BREAK_CREATED_STATUS)
+            status, created = BreakStatus.objects.get_or_create(
+                code=BREAK_CREATED_STATUS,
+                defaults=BREAK_CREATED_DEFAULT
+            )
+            self.status = status
         return super(Break, self).save(*args, **kwargs)
