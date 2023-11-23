@@ -23,9 +23,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'djoser',
+    'phonenumbers',
 
     'api',
     'common',
+    'users',
+    'breaks',
 ]
 
 MIDDLEWARE = [
@@ -59,9 +62,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ('users.backends.AuthBackend',)
 
 DATABASES = {
     'default': {
@@ -100,7 +102,7 @@ SPECTACULAR_SETTINGS = {
 
     'SERVE_AUTHENTICATION': [
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
 
     ],
 
@@ -178,8 +180,8 @@ CSRF_COOKIE_SECURE = False
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Ekaterinburg'
+LANGUAGE_CODE = 'ru-Ru'
+TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
