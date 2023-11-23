@@ -59,7 +59,6 @@ class Replacement(InfoMixin):
     # def free_breaks_available(self, break_start, break_end):
     #     self.breaks
 
-
 class ReplacementMember(models.Model):
     member = models.ForeignKey(
         'organisations.Member', models.CASCADE, 'replacements_info',

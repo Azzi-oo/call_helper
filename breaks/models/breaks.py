@@ -33,10 +33,10 @@ class Break(models.Model):
     class Meta:
         verbose_name = 'Обеденный перерыв'
         verbose_name_plural = 'Обеденные перерывы'
-        ordering = ('-replacement__date', 'breal_Start')
+        ordering = ('-replacement__date', 'break_start')
 
     def __str__(self):
-        return f'Обед пользователя {self.employee} ({self.pk})'
+        return f'Обед пользователя {self.employees} ({self.pk})'
 
     def save(self, *args, **kwargs):
         if not self.pk:
