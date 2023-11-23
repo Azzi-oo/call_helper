@@ -1,2 +1,3 @@
 SECRET_KEY='django-insecure-=!3o=(cbww+tomt)($#p9(wl3(s^a892awm2njw60et37$ctoc'
-*/migrations/
+*/migrations/*
+!*.ьшпкфешщты.__init__.py

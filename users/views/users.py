@@ -1,9 +1,14 @@
 from django.contrib.auth import get_user_model
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny
-
+from rest_framework.views import APIView
 from users.serializers.api import users as user_s
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.status import HTTP_204_NO_CONTENT
+import pdb
+from rest_framework import generics
 
 User = get_user_model()
 
@@ -11,7 +16,38 @@ User = get_user_model()
 @extend_schema_view(
     post=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
 )
-class RegistrationView(CreateAPIView):
+class RegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [AllowAny]
     serializer_class = user_s.RegistrationSerializer
+
+
+@extend_schema_view(
+    post=extend_schema(request=user_s.ChangePasswordSerializer,
+        summary='Смена пароля', tags=['Aутентификация & Авторизация']),
+)
+class ChangePasswordView(APIView):
+    def post(self, request):
+        user = request.user
+        serializer = user_s.ChangePasswordSerializer(
+            instance=user, data=request.data
+        )
+        pdb.set_trace()
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+
+@extend_schema_view(
+    get=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
+    put=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
+    patch=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
+)
+class MeView(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = user_s.MeListSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH']:
+            return user_s.MeUpdateSerializer
+        return user_s.MeListSerializer
