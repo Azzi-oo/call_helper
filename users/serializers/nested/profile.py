@@ -12,3 +12,12 @@ class ProfileShortSerializer(serializers.ModelSerializer):
         fields = (
             'telegram_id',
         )
+
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = (
+            'telegram_id',
+        )

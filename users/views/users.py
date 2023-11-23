@@ -39,9 +39,9 @@ class ChangePasswordView(APIView):
 
 
 @extend_schema_view(
-    get=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
-    put=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
-    patch=extend_schema(summary='Регистрация пользователя', tags=['Aутентификация & Авторизация']),
+    get=extend_schema(summary='Профиль пользователя', tags=['Пользователи']),
+    put=extend_schema(summary='Изменить профиль пользователя', tags=['Пользователи']),
+    patch=extend_schema(summary='Изменить профиль пользователя частично', tags=['Пользователи']),
 )
 class MeView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
@@ -51,3 +51,6 @@ class MeView(RetrieveUpdateAPIView):
         if self.request.method in ['PUT', 'PATCH']:
             return user_s.MeUpdateSerializer
         return user_s.MeListSerializer
+    
+    def get_object(self):
+        return self.request.user

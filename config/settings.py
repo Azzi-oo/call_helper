@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'common',
     'users',
     'breaks',
+    'organizations',
 ]
 
 MIDDLEWARE = [

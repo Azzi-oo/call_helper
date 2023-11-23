@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-
+from django.utils import timezone
 User = get_user_model()
 
 
@@ -46,7 +46,7 @@ class Group(models.Model):
         User,
         'group_employees',
         verbose_name='Сотрудники',
-        blank=True,
+        blank=True, through='Employee'
     )
     min_active = models.PositiveSmallIntegerField(
         'Минимальное количество активных сотрудников',
@@ -72,3 +72,24 @@ class Group(models.Model):
     @property
     def break_duration(self):
         return 500
+
+
+class Employee(models.Model):
+    organization = models.ForeignKey(
+        'Organization', models.CASCADE, 'employees_info',
+    )
+    user = models.ForeignKey(
+        User, models.CASCADE, 'organization_info',
+    )
+    position = models.ForeignKey(
+        'Position', models.RESTRICT, 'organization_info',
+    )
+    date_joined = models.DateField('Date joined', default=timezone.now)
+
+    class Meta:
+        verbose_name = 'Сотрудник организации'
+        verbose_name_plural = 'Сотрудники организаций'
+        ordering = ('-date_joined',)
+
+    def __str__(self):
+        return f'Employee {self.user}'

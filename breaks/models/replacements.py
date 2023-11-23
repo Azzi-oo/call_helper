@@ -8,7 +8,7 @@ User = get_user_model()
 
 class GroupInfo(models.Model):
     group = models.OneToOneField(
-        'organisations.Group', models.CASCADE, related_name='breaks_info',
+        'organizations.Group', models.CASCADE, related_name='breaks_info',
         verbose_name='Группа', primary_key=True,
     )
     min_active = models.PositiveSmallIntegerField(
@@ -23,6 +23,7 @@ class GroupInfo(models.Model):
     class Meta:
         verbose_name = 'Параметр обеденных перерывов'
         verbose_name_plural = 'Параметры обеденных перерывов'
+        ordering = ('name',)
 
     def __str__(self):
         return f'Break Info'
@@ -30,7 +31,7 @@ class GroupInfo(models.Model):
 
 class Replacement(InfoMixin):
     group = models.ForeignKey(
-        'breaks.GroupInfo', models.CASCADE, 'replacements',
+        'GroupInfo', models.CASCADE, 'replacements',
         verbose_name='Группа',
     )
     date = models.DateField('Дата смены')
@@ -58,6 +59,7 @@ class Replacement(InfoMixin):
 
     # def free_breaks_available(self, break_start, break_end):
     #     self.breaks
+
 
 class ReplacementMember(models.Model):
     member = models.ForeignKey(
