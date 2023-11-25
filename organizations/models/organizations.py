@@ -2,9 +2,10 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 User = get_user_model()
+from common.models.mixins import InfoMixin, DateMixin
 
 
-class Organization(models.Model):
+class Organization(InfoMixin):
     name = models.CharField("Название", max_length=150)
     director = models.ForeignKey(
         to=User,
@@ -28,7 +29,7 @@ class Organization(models.Model):
         return f'{self.name} ({self.pk})'
 
 
-class Group(models.Model):
+class Group(InfoMixin):
     organization = models.ForeignKey(
         'breaks.Organization',
         on_delete=models.CASCADE,
