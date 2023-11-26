@@ -3,7 +3,6 @@ from django.db import models
 from breaks.constants import BREAK_CREATED_STATUS, BREAK_CREATED_DEFAULT
 from breaks.models.dicts import BreakStatus
 
-
 User = get_user_model()
 
 
