@@ -152,3 +152,14 @@ class MeUpdateSerializer(serializers.ModelSerializer):
         )
         profile_serializer.is_valid(raise_exception=True)
         profile_serializer.save()
+
+
+class UserSearchListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'full_name',
+        )
