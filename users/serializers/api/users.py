@@ -99,6 +99,15 @@ class MeUpdateSerializer(serializers.ModelSerializer):
             'date_joined',
         }
 
+    # def validate(self, attrs):
+    #     user = self.instance
+    #     if user.is_corporate:
+    #         raise ParseError(
+    #             'У вас корпоративный аккаунт. '
+    #             'Обратитесь к администратору для изменения данных профиля.'
+    #         )
+    #     return attrs
+
     def update(self, instance, validated_data):
         # Проверка наличия профиля
         profile_data = validated_data.pop('profile') if 'profile' in validated_data else None
@@ -137,10 +146,9 @@ class MeUpdateSerializer(serializers.ModelSerializer):
 #         self._update_profile(instance.profile, profile_data)
 
 #         return instance
-
-#     def _update_profile(self, profile, data):
-#         profile_serializer = ProfileUpdateSerializer(
-#             instance=profile, data=data, partial=True
-#         )
-#         profile_serializer.is_valid(raise_exception=True)
-#         profile_serializer.save()
+    def _update_profile(self, profile, data):
+        profile_serializer = ProfileUpdateSerializer(
+            instance=profile, data=data, partial=True
+        )
+        profile_serializer.is_valid(raise_exception=True)
+        profile_serializer.save()

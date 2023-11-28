@@ -51,6 +51,6 @@ class MeView(RetrieveUpdateAPIView):
         if self.request.method in ['PUT', 'PATCH']:
             return user_s.MeUpdateSerializer
         return user_s.MeListSerializer
-    
+
     def get_object(self):
         return self.request.user

@@ -23,3 +23,8 @@ class CRUViewSet(ExtendedGenericViewSet,
 class CRUDViewSet(CRUViewSet,
                   mixins.DestroyModelMixin):
     pass
+
+
+# class DictListMixin(ListViewSet):
+#     serializer_class = DictMixinSerializer
+#     pagination_class = None
