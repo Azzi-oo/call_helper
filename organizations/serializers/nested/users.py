@@ -14,4 +14,5 @@ class UserShortSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
+            'full_name',
         )

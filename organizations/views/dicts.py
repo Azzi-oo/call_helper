@@ -1,6 +1,5 @@
 from common.views.mixins import ExtendedGenericViewSet
 from organizations.models.dicts import Position
-from organizations.models.dicts import Position
 from drf_spectacular.utils import extend_schema_view, extend_schema
 
 

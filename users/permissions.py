@@ -3,7 +3,7 @@ from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class IsNotCorporate(BasePermission):
     message = (
-        'У вас корпоративный аккаунт. '
+        'У вас корпоративный аккаунт. Данное действие недоступно.'
         'Обратитесь к администратору для изменения данных профиля.'
     )
 
